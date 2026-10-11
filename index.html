@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Zatul Iqbal | Senior Software Engineer & Architect</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            950: '#020617',
+                            900: '#090d16',
+                            800: '#111827',
+                            700: '#1f293d',
+                        },
+                        neon: {
+                            emerald: '#10b981',
+                            violet: '#8b5cf6',
+                            cyan: '#06b6d4',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        code: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-code { font-family: 'Fira Code', monospace; }
+        
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Moving Gradient Mesh Background */
+        @keyframes gradientMesh {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .mesh-bg {
+            background: linear-gradient(-45deg, #020617, #090d16, #1e1b4b, #022c22, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientMesh 18s ease infinite;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 7s ease-in-out 3s infinite;
+        }
+
+        /* Glow & Neon Effects */
+        .glow-violet:hover {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
+        }
+        .glow-emerald:hover {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.35);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
+</head>
+<body class="mesh-bg text-slate-100 selection:bg-neon-emerald selection:text-dark-950 antialiased overflow-x-hidden">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-800/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#hero" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neon-emerald to-neon-violet flex items-center justify-center font-code font-bold text-lg text-white shadow-lg shadow-neon-emerald/20 group-hover:scale-110 transition-transform duration-300">
+                    &lt;/&gt;
+                </div>
+                <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                    Muhammad Zatul Iqbal
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-neon-emerald transition-colors">About</a>
+                <a href="#skills" class="hover:text-neon-emerald transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-neon-emerald transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-neon-emerald transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-neon-emerald transition-colors">Contact</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-neon-emerald text-dark-950 font-bold text-sm hover:bg-emerald-400 transition-all duration-300 shadow-lg shadow-neon-emerald/25 flex items-center space-x-2 group">
+                    <span>Let's Talk</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2 rounded-xl bg-slate-900/80 border border-slate-800">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-4 pb-6 space-y-3 glass-panel border-b border-slate-800/80">
+            <a href="#about" class="block py-2 text-slate-300 hover:text-neon-emerald font-medium transition-colors">About</a>
+            <a href="#skills" class="block py-2 text-slate-300 hover:text-neon-emerald font-medium transition-colors">Skills</a>
+            <a href="#projects" class="block py-2 text-slate-300 hover:text-neon-emerald font-medium transition-colors">Projects</a>
+            <a href="#experience" class="block py-2 text-slate-300 hover:text-neon-emerald font-medium transition-colors">Experience</a>
+            <a href="#contact" class="block py-2 text-slate-300 hover:text-neon-emerald font-medium transition-colors">Contact</a>
+            <div class="pt-2">
+                <a href="#contact" class="w-full py-3 rounded-xl bg-neon-emerald text-dark-950 font-bold text-center block shadow-lg shadow-neon-emerald/25">Let's Talk</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+        <!-- Floating Neon Glow Blobs -->
+        <div class="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-neon-emerald/15 rounded-full blur-[120px] pointer-events-none animate-float"></div>
+        <div class="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-neon-violet/15 rounded-full blur-[120px] pointer-events-none animate-float-delayed"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <!-- Left Info -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-slate-700/60 text-xs font-semibold text-neon-emerald shadow-inner">
+                    <span class="w-2.5 h-2.5 rounded-full bg-neon-emerald animate-ping"></span>
+                    <span>Available for Senior Roles & Tech Consulting</span>
+                </div>
+
+                <!-- <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                    Architecting <br>
+                    <span class="bg-gradient-to-r from-neon-emerald via-neon-cyan to-neon-violet bg-clip-text text-transparent">
+                        High-Scale Systems
+                    </span>
+                </h1> -->
+
+                <div class="text-xl sm:text-2xl font-semibold text-slate-300 h-10 flex items-center justify-center lg:justify-start">
+                    <span>I am a &nbsp;</span>
+                    <span id="typewriter" class="text-neon-emerald font-code border-r-2 border-neon-emerald pr-1 animate-pulse"></span>
+                </div>
+
+                <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Hi, I'm <strong class="text-white font-semibold">Muhammad Zatul Iqbal</strong>. With over 7 years of experience as a full stack developer, i have strong track record of building and scaling enterprise applications across various industries.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-neon-emerald text-dark-950 font-bold hover:bg-emerald-400 transition-all duration-300 shadow-xl shadow-neon-emerald/25 text-center flex items-center justify-center space-x-2 glow-emerald transform hover:-translate-y-1">
+                        <span>Explore Projects</span>
+                        <i data-lucide="code" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-white font-semibold hover:bg-slate-800/80 transition-all duration-300 text-center flex items-center justify-center space-x-2 glow-violet transform hover:-translate-y-1">
+                        <span>Get in Touch</span>
+                        <i data-lucide="mail" class="w-5 h-5 text-neon-violet"></i>
+                    </a>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-white">7+</p>
+                        <p class="text-xs sm:text-sm text-slate-400">Years Exp.</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-neon-emerald">40+</p>
+                        <p class="text-xs sm:text-sm text-slate-400">Apps Shipped</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-neon-violet">98%</p>
+                        <p class="text-xs sm:text-sm text-slate-400">Uptime Record</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Code Preview Widget -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel rounded-2xl shadow-2xl overflow-hidden glow-violet transition-all duration-500 animate-float">
+                    <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-neon-emerald"></div>
+                            <span class="ml-2 text-xs font-code text-slate-400">EngineeredSystem.ts</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 text-neon-emerald text-xs font-code">TypeScript</span>
+                    </div>
+                    <div class="p-6 font-code text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed space-y-1">
+                        <p><span class="text-neon-violet">class</span> <span class="text-amber-300">SystemArchitect</span> {</p>
+                        <p class="pl-4">constructor(</p>
+                        <p class="pl-8 text-slate-400">public name: string = <span class="text-neon-emerald">"Muhammad Zatul Iqbal"</span>,</p>
+                        <p class="pl-8 text-slate-400">public focus: string = <span class="text-neon-emerald">"Scalability"</span></p>
+                        <p class="pl-4">) {}</p>
+                        <br>
+                        <p class="pl-4"><span class="text-neon-violet">async</span> <span class="text-blue-400">deployCluster</span>() {</p>
+                        <p class="pl-8"><span class="text-neon-violet">await</span> k8s.apply(<span class="text-neon-emerald">"prod-cluster"</span>);</p>
+                        <!-- <p class="pl-8">logger.info(<span class="text-neon-emerald">"System running at 100k RPS"</span>);</p> -->
+                        <p class="pl-4">}</p>
+                        <p>}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Stats Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest uppercase text-neon-emerald font-code">Background & Philosophy</h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Engineering with Precision & Vision</h3>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    I translate intense technical obstacles into seamless, lightning-fast digital experiences.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-slate-300 leading-relaxed font-light text-base sm:text-lg">
+                    <p>
+                        With over 7 years in software engineering, My focus lies in building robust, efficient, and scalable systems and applications. My journey in software engineering is driven by a deep curiosity about how technology can solve real-world problems and deliver a direct impact on both business operations and user experience.
+                    </p>
+                    <p>
+                        I believe that good code is not merely code that works, but code that is easy to understand, test, and develop by the team. I prioritize an architecture that is simple yet effective.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-neon-emerald/50 transition-colors">
+                            <div class="text-neon-emerald mb-2"><i data-lucide="cpu" class="w-6 h-6"></i></div>
+                            <h4 class="font-bold text-white text-base">Scalable Architecture</h4>
+                            <p class="text-xs text-slate-400 mt-1">Designing clean, maintainable RESTful/GraphQL APIs and optimized database schemas for seamless performance.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-neon-violet/50 transition-colors">
+                            <div class="text-neon-violet mb-2"><i data-lucide="layout" class="w-6 h-6"></i></div>
+                            <h4 class="font-bold text-white text-base">Adaptive Interface</h4>
+                            <p class="text-xs text-slate-400 mt-1">Designing visually appealing and responsive user interfaces for both web browsers and native applications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Counter Stats Cards -->
+                <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="glass-panel p-8 rounded-3xl text-center space-y-2 glow-emerald transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-neon-emerald counter" data-target="7">0</span><span class="text-4xl font-extrabold text-neon-emerald">+</span>
+                        <p class="text-sm font-semibold text-slate-300">Years Experience</p>
+                        <p class="text-xs text-slate-500">Delivering enterprise solutions</p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-3xl text-center space-y-2 glow-violet transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-neon-violet counter" data-target="40">0</span><span class="text-4xl font-extrabold text-neon-violet">+</span>
+                        <p class="text-sm font-semibold text-slate-300">Projects Shipped</p>
+                        <p class="text-xs text-slate-500">Web, Desktop & Mobile</p>
+                    </div>
+                    <!-- <div class="glass-panel p-8 rounded-3xl text-center space-y-2 glow-violet transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-neon-cyan counter" data-target="100">0</span><span class="text-4xl font-extrabold text-neon-cyan">k+</span>
+                        <p class="text-sm font-semibold text-slate-300">Peak RPS Handled</p>
+                        <p class="text-xs text-slate-500">High throughput systems</p>
+                    </div> -->
+                    <div class="glass-panel p-8 rounded-3xl text-center space-y-2 glow-emerald transform hover:scale-105 transition-transform duration-300">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-neon-emerald counter" data-target="98">0</span><span class="text-4xl font-extrabold text-neon-emerald">%</span>
+                        <p class="text-sm font-semibold text-slate-300">Client Satisfaction</p>
+                        <p class="text-xs text-slate-500">Consistent top ratings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack / Skills Section -->
+    <section id="skills" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest uppercase text-neon-emerald font-code">Technical Expertise</h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Skills & Tech Stack</h3>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Production-grade technologies I leverage to build robust ecosystems.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Frontend -->
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neon-emerald/50 transition-all duration-300 group">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-neon-emerald/10 text-neon-emerald flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="monitor" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Frontend</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">React.js / Next.js</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">JavaScript</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Tailwind CSS</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Vue.js</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">C#</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Flutter</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Java</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">VB.Net</span>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neon-violet/50 transition-all duration-300 group">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-neon-violet/10 text-neon-violet flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Backend</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">C#</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Java</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Python / FastAPI</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">REST & GraphQL</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Microservices</span>
+                    </div>
+                </div>
+
+                <!-- Database & Cloud -->
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neon-cyan/50 transition-all duration-300 group">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-neon-cyan/10 text-neon-cyan flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="cloud" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Database</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">MySQL</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">SQL Server</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Oracle</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Supabase / Firebase</span>
+                    </div>
+                </div>
+
+                <!-- Tools & DevOps -->
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neon-emerald/50 transition-all duration-300 group">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="wrench" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Tools</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Docker & Kubernetes</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Git & GitHub Actions</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">CI/CD Pipelines</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-900/80 text-slate-300 text-xs font-medium border border-slate-700/60">Postman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <h2 class="text-xs font-semibold tracking-widest uppercase text-neon-emerald font-code">Featured Work</h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Projects Showcase</h3>
+                <!-- <p class="text-slate-400 text-base sm:text-lg">
+                    Explore production-grade applications, distributed systems, and open-source tools. Click any card for detailed specs.
+                </p> -->
+            </div>
+
+            <!-- Filter Buttons -->
+            <!-- <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+                <button class="filter-btn px-6 py-2.5 rounded-2xl text-sm font-bold bg-neon-emerald text-dark-950 transition-all shadow-lg shadow-neon-emerald/25" data-filter="all">All Projects</button>
+                <button class="filter-btn px-6 py-2.5 rounded-2xl text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all border border-slate-800" data-filter="web">Web Apps</button>
+                <button class="filter-btn px-6 py-2.5 rounded-2xl text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all border border-slate-800" data-filter="backend">Backend & API</button>
+                <button class="filter-btn px-6 py-2.5 rounded-2xl text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all border border-slate-800" data-filter="mobile">Mobile / Cloud</button>
+            </div> -->
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card glass-panel rounded-3xl border border-slate-800 overflow-hidden flex flex-col hover:border-neon-emerald/50 transition-all duration-300 group cursor-pointer" data-category="web" data-title="Maintenance & Bug Fixes" data-desc="Contributed as a Full-Stack Developer to maintaining systems, resolving technical issues, and delivering client projects accurately and on time, in accordance with the scope of work." data-tags="html5, JavaScript, ReactJS, Tailwind CSS, jQuery, Web API, C#, Java, Sql Server, Oracle" data-image="https://6acae4c37d990bca6541409a.imgix.net/sandbox/126628.jpg">
+                    <div class="relative h-52 overflow-hidden bg-slate-900">
+                        <img src="https://6acae4c37d990bca6541409a.imgix.net/sandbox/126628.jpg" alt="Maintain Project Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3.5 py-1 rounded-full glass-panel text-neon-emerald text-xs font-bold border border-slate-700">Web App</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold text-white group-hover:text-neon-emerald transition-colors">Web App Maintain and Bug Fixes</h4>
+                            <p class="text-sm text-slate-400 line-clamp-2">resolving technical issues, and delivering client projects accurately and on time.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Html5</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">React.js</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Javascript</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">C#</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">SQL Server</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-semibold text-neon-emerald">
+                                <span>Click for details</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-panel rounded-3xl border border-slate-800 overflow-hidden flex flex-col hover:border-neon-violet/50 transition-all duration-300 group cursor-pointer" data-category="Desktop app" data-title="Payroll Development" data-desc="Payroll Module Development: Designed, built, and enhanced payroll software, utilizing C# and DevExpress to ensure UI/UX reliability and payroll calculation accuracy.
+Accounting Plugin Ecosystem Development: Built and maintained various custom plugins serving as key pillars supporting the core functions of AutoCount and SQLAccount software; these solutions were designed to meet specific client needs not covered by the default systems.
+Client-Side API Architecture & Integration: Developed robust APIs to bridge and process data transactions between AutoCount, SQLAccount, internal plugins, and clients' web applications, ensuring seamless, real-time data synchronization.
+SQL Server Database Performance Optimization: Significantly improved system efficiency and response times by refactoring suboptimal queries; actively designed and managed advanced database architecture utilizing SQL Server stored procedures, functions, and views." data-tags="DevExpress, C#, Inno Setup, Sql Server" data-image="https://6acae4c37d990bca6541409a.imgix.net/sandbox/128709.jpg">
+                    <div class="relative h-52 overflow-hidden bg-slate-900">
+                        <img src="https://6acae4c37d990bca6541409a.imgix.net/sandbox/128709.jpg" alt="API Gateway" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3.5 py-1 rounded-full glass-panel text-neon-violet text-xs font-bold border border-slate-700">Desktop App</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold text-white group-hover:text-neon-emerald transition-colors">Payroll Development</h4>
+                            <p class="text-sm text-slate-400 line-clamp-2">Developed payroll modules, an accounting plugin ecosystem (AutoCount & SQLAccount), and API architecture, as well as optimized SQL Server databases using C# and DevExpress.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">DevExpress</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">C#</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Inno Setup</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Sql Server</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-semibold text-neon-violet">
+                                <span>Click for details</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <!-- <div class="project-card glass-panel rounded-3xl border border-slate-800 overflow-hidden flex flex-col hover:border-neon-cyan/50 transition-all duration-300 group cursor-pointer" data-category="mobile" data-title="Kubernetes GitOps Pipeline" data-desc="Automated AWS EKS cluster deployment pipeline utilizing Terraform, ArgoCD, and GitHub Actions for zero-downtime continuous delivery." data-tags="Terraform, Kubernetes, AWS, ArgoCD" data-image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80">
+                    <div class="relative h-52 overflow-hidden bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Cloud Pipeline" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3.5 py-1 rounded-full glass-panel text-neon-cyan text-xs font-bold border border-slate-700">Cloud / DevOps</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold text-white group-hover:text-neon-emerald transition-colors">Kubernetes GitOps Pipeline</h4>
+                            <p class="text-sm text-slate-400 line-clamp-2">Automated AWS EKS deployment pipeline using Terraform and ArgoCD.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Terraform</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Kubernetes</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">AWS</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-semibold text-neon-cyan">
+                                <span>Click for details</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 4 -->
+                <!-- <div class="project-card glass-panel rounded-3xl border border-slate-800 overflow-hidden flex flex-col hover:border-neon-emerald/50 transition-all duration-300 group cursor-pointer" data-category="web" data-title="Omnichannel E-Commerce Suite" data-desc="Headless e-commerce platform featuring React, Node.js GraphQL API, Stripe webhooks, and optimized image processing pipelines." data-tags="React, GraphQL, Stripe API, Node.js" data-image="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80">
+                    <div class="relative h-52 overflow-hidden bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Suite" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3.5 py-1 rounded-full glass-panel text-neon-emerald text-xs font-bold border border-slate-700">Web App</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold text-white group-hover:text-neon-emerald transition-colors">Omnichannel E-Commerce Suite</h4>
+                            <p class="text-sm text-slate-400 line-clamp-2">Headless e-commerce solution with React, GraphQL and Stripe integration.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">React</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">GraphQL</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Stripe</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-semibold text-neon-emerald">
+                                <span>Click for details</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 5 -->
+                <!-- <div class="project-card glass-panel rounded-3xl border border-slate-800 overflow-hidden flex flex-col hover:border-neon-violet/50 transition-all duration-300 group cursor-pointer" data-category="backend" data-title="Real-Time Messaging Daemon" data-desc="Low-latency WebSocket communication service for enterprise collaboration with end-to-end encryption and room management." data-tags="Node.js, WebSockets, MongoDB, Redis" data-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80">
+                    <div class="relative h-52 overflow-hidden bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Messaging Daemon" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3.5 py-1 rounded-full glass-panel text-neon-violet text-xs font-bold border border-slate-700">Backend</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold text-white group-hover:text-neon-emerald transition-colors">Real-Time Messaging Daemon</h4>
+                            <p class="text-sm text-slate-400 line-clamp-2">Low-latency WebSocket communication service with end-to-end encryption.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Node.js</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">WebSockets</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">MongoDB</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-semibold text-neon-violet">
+                                <span>Click for details</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 6 -->
+                <!-- <div class="project-card glass-panel rounded-3xl border border-slate-800 overflow-hidden flex flex-col hover:border-neon-cyan/50 transition-all duration-300 group cursor-pointer" data-category="mobile" data-title="Serverless Log Analyzer" data-desc="Automated log aggregation pipeline processing cloudwatch and error streams using AWS Lambda, Python, and Elasticsearch." data-tags="AWS Lambda, Python, Elasticsearch, Serverless" data-image="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80">
+                    <div class="relative h-52 overflow-hidden bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Log Analyzer" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3.5 py-1 rounded-full glass-panel text-neon-cyan text-xs font-bold border border-slate-700">Cloud / DevOps</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold text-white group-hover:text-neon-emerald transition-colors">Serverless Log Analyzer</h4>
+                            <p class="text-sm text-slate-400 line-clamp-2">Automated log aggregation pipeline processing cloud streams with AWS Lambda.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">AWS Lambda</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Python</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-code">Elasticsearch</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-semibold text-neon-cyan">
+                                <span>Click for details</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest uppercase text-neon-emerald font-code">Career Journey</h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Experience & Work History</h3>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    A timeline of a professional career at rapidly growing technology companies.
+                </p>
+            </div>
+
+            <div class="relative border-l border-slate-800 ml-4 sm:ml-36 space-y-12">
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-dark-950 border-2 border-neon-emerald group-hover:bg-neon-emerald transition-colors"></div>
+                    
+                    <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right text-xs font-bold text-neon-emerald tracking-wider uppercase mb-2 sm:mb-0 font-code">
+                        Aug 2025 — Aug 2026
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 hover:border-neon-emerald/50 transition-all duration-300 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <h4 class="text-xl font-bold text-white">Senior Full Stack Engineer</h4>
+                            <span class="text-sm font-semibold text-neon-violet">PT Akuntansi Digital Solusi</span>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">
+                            Developed desktop payroll applications, Built integration plugins for AutoCount and SQL Accounting, Designed custom APIs for client transaction requirements.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">DevExpress</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">C#</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Inno Setup</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Sql Server</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-dark-950 border-2 border-neon-violet group-hover:bg-neon-violet transition-colors"></div>
+                    
+                    <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right text-xs font-bold text-neon-violet tracking-wider uppercase mb-2 sm:mb-0 font-code">
+                        Feb 2025 — July 2025
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 hover:border-neon-violet/50 transition-all duration-300 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <h4 class="text-xl font-bold text-white">Senior Fullstack Engineer</h4>
+                            <span class="text-sm font-semibold text-neon-violet">PT Giga Sena Group</span>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">
+                            Built and maintained an ERP Cooperative System project(Web and Mobile App) Using ASP.Net, Flutter and Sql Server to deliver integrated and efficient operational solutions.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">ASP.Net</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Flutter</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">C#</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Postman</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Web API</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Sql Server</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Jira</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-dark-950 border-2 border-slate-500 group-hover:bg-slate-300 transition-colors"></div>
+                    
+                    <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right text-xs font-bold text-slate-400 tracking-wider uppercase mb-2 sm:mb-0 font-code">
+                        Apr 2022 — Feb 2025
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 hover:border-slate-700 transition-all duration-300 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <h4 class="text-xl font-bold text-white">Fullstack Software Developer</h4>
+                            <span class="text-sm font-semibold text-neon-violet">PT Astra Honda Motor</span>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">
+                            Development, integration and optimization of large scale internal enterprise web applications. Utilized a diverse tech stack including html, PHP, Javascript, ReactJs, jQuery, C#, Java, Sql Server and Oracle to build reliable digital solutions, handle troubleshooting and ensure system quality through developer testing.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">JavaScript</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">HTML/CSS</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">jQuery</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">ReactJs</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">C#</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Java</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Sql Server</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Oracle</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Git</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-dark-950 border-2 border-slate-500 group-hover:bg-slate-300 transition-colors"></div>
+                    
+                    <div class="sm:absolute sm:-left-36 sm:top-1 sm:text-right text-xs font-bold text-slate-400 tracking-wider uppercase mb-2 sm:mb-0 font-code">
+                        July 2018 — Apr 2022
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 hover:border-slate-700 transition-all duration-300 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <h4 class="text-xl font-bold text-white">Fullstack Software Developer</h4>
+                            <span class="text-sm font-semibold text-neon-violet">PT Realta Chakradarma</span>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">
+                            Developed and maintained the Rhapsody Hospitality Management System using VB.Net and Sql Server. focused on building hotel operational modules, accounting business logic and database optimized for high speed transaction data processing.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">VB.Net</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Sql Server</span>
+                            <span class="px-3 py-1 rounded-xl bg-slate-900 text-slate-300 text-xs font-code">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest uppercase text-neon-emerald font-code">Get In Touch</h2>
+                <h3 class="text-3xl sm:text-5xl font-extrabold text-white">Let's Build Something Amazing</h3>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Have an ambitious project, an engineering role open, or want to collaborate? Drop me a line!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Contact Info -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 space-y-6">
+                        <h4 class="text-2xl font-bold text-white">Contact Information</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">
+                            I am currently open to senior engineering leadership roles, technical architecture consulting, and high-impact collaborative projects.
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-center space-x-4 text-slate-300">
+                                <div class="w-12 h-12 rounded-2xl bg-neon-emerald/10 text-neon-emerald flex items-center justify-center">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500">Email Me</p>
+                                    <p class="text-sm font-semibold text-white">zatuliqbalm@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 text-slate-300">
+                                <div class="w-12 h-12 rounded-2xl bg-neon-violet/10 text-neon-violet flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500">Location</p>
+                                    <p class="text-sm font-semibold text-white">Jakarta, CA (Remote Friendly)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="pt-4 border-t border-slate-800 flex items-center space-x-4">
+                            <!-- <a href="https://github.com" target="_blank" class="w-12 h-12 rounded-2xl glass-panel text-slate-300 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-all">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a> -->
+                            <a href="https://www.linkedin.com/in/muhammad-zatul-iqbal?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="w-12 h-12 rounded-2xl glass-panel text-slate-300 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-all">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <!-- <a href="https://twitter.com" target="_blank" class="w-12 h-12 rounded-2xl glass-panel text-slate-300 hover:text-white hover:bg-slate-800 flex items-center justify-center transition-all">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="glass-panel p-8 sm:p-10 rounded-3xl border border-slate-800 space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="name" class="text-xs font-bold text-slate-300 uppercase tracking-wider font-code">Your Name</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3.5 rounded-2xl bg-dark-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-neon-emerald transition-colors text-sm" placeholder="John Doe">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="text-xs font-bold text-slate-300 uppercase tracking-wider font-code">Your Email</label>
+                                <input type="email" id="email" required class="w-full px-4 py-3.5 rounded-2xl bg-dark-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-neon-emerald transition-colors text-sm" placeholder="john@example.com">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="subject" class="text-xs font-bold text-slate-300 uppercase tracking-wider font-code">Subject</label>
+                            <input type="text" id="subject" required class="w-full px-4 py-3.5 rounded-2xl bg-dark-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-neon-emerald transition-colors text-sm" placeholder="Project Inquiry / Job Opportunity">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="message" class="text-xs font-bold text-slate-300 uppercase tracking-wider font-code">Message</label>
+                            <textarea id="message" rows="5" required class="w-full px-4 py-3.5 rounded-2xl bg-dark-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-neon-emerald transition-colors text-sm resize-none" placeholder="Write your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-2xl bg-neon-emerald text-dark-950 font-extrabold hover:bg-emerald-400 transition-all shadow-xl shadow-neon-emerald/25 flex items-center justify-center space-x-2">
+                            <span>Send Message</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- <footer class="py-12 border-t border-slate-800/80 bg-dark-950 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            <p>© 2026 Alex Turner. Engineered with precision using HTML, Tailwind CSS & JavaScript.</p>
+        </div>
+    </footer> -->
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-slate-700 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content-box">
+            <div class="relative h-64 bg-slate-900">
+                <img id="modal-img" src="" alt="Project Image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent"></div>
+                <button id="close-modal" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-panel text-white flex items-center justify-center hover:bg-slate-800 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-8 space-y-6">
+                <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
+                <p id="modal-desc" class="text-slate-300 text-sm sm:text-base leading-relaxed font-light"></p>
+                <div class="space-y-2">
+                    <p class="text-xs font-bold text-neon-emerald uppercase font-code">Technologies Used:</p>
+                    <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+                </div>
+                <!-- <div class="pt-4 border-t border-slate-800 flex justify-end space-x-4">
+                    <a href="https://github.com" target="_blank" class="px-6 py-2.5 rounded-xl glass-panel text-white font-semibold hover:bg-slate-800 transition-colors flex items-center space-x-2 text-sm">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>Source Code</span>
+                    </a>
+                    <a href="https://demo.com" target="_blank" class="px-6 py-2.5 rounded-xl bg-neon-emerald text-dark-950 font-bold hover:bg-emerald-400 transition-colors flex items-center space-x-2 text-sm shadow-lg shadow-neon-emerald/25">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        <span>Live Demo</span>
+                    </a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div id="success-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300">
+        <div class="flex items-center space-x-3 px-6 py-4 rounded-2xl bg-neon-emerald text-dark-950 font-bold shadow-2xl">
+            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+            <span>Message sent successfully! I will get back to you soon.</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Typewriter Effect
+        const words = ["Full Stack Developer"];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            let loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typewriter').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2500);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            let loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typewriter').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+        typingEffect();
+
+        // Scroll Reveal Intersection Observer
+        const observerOptions = { threshold: 0.15 };
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Statistics Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        function runCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 40;
+
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 40);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        const statsSection = document.getElementById('about');
+        const statsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !animated) {
+                runCounters();
+                animated = true;
+            }
+        }, { threshold: 0.3 });
+
+        if (statsSection) statsObserver.observe(statsSection);
+
+        // Project Filtering Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-neon-emerald', 'text-dark-950', 'shadow-lg', 'shadow-neon-emerald/25');
+                    b.classList.add('glass-panel', 'text-slate-300');
+                });
+                btn.classList.remove('glass-panel', 'text-slate-300');
+                btn.classList.add('bg-neon-emerald', 'text-dark-950', 'shadow-lg', 'shadow-neon-emerald/25');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Detail Modal Logic
+        const modal = document.getElementById('project-modal');
+        const modalContentBox = document.getElementById('modal-content-box');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTags = document.getElementById('modal-tags');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.getAttribute('data-title');
+                const desc = card.getAttribute('data-desc');
+                const tags = card.getAttribute('data-tags').split(', ');
+                const image = card.getAttribute('data-image');
+
+                modalImg.src = image;
+                modalTitle.innerText = title;
+                modalDesc.innerText = desc;
+                modalTags.innerHTML = '';
+
+                tags.forEach(tag => {
+                    const span = document.createElement('span');
+                    span.className = 'px-3 py-1 rounded-xl bg-slate-900 text-neon-emerald text-xs font-code border border-slate-700';
+                    span.innerText = tag;
+                    modalTags.appendChild(span);
+                });
+
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalContentBox.classList.remove('scale-95');
+                modalContentBox.classList.add('scale-100');
+            });
+        });
+
+        function closeModalFunc() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContentBox.classList.remove('scale-100');
+            modalContentBox.classList.add('scale-95');
+        }
+
+        closeModalBtn.addEventListener('click', closeModalFunc);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModalFunc();
+        });
+
+        // Contact Form Submission & Success Toast
+        const contactForm = document.getElementById('contact-form');
+        const successToast = document.getElementById('success-toast');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            successToast.classList.remove('translate-y-32', 'opacity-0');
+            successToast.classList.add('translate-y-0', 'opacity-100');
+
+            contactForm.reset();
+
+            setTimeout(() => {
+                successToast.classList.remove('translate-y-0', 'opacity-100');
+                successToast.classList.add('translate-y-32', 'opacity-0');
+            }, 4500);
+        });
+    </script>
+</body>
+</html>
